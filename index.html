@@ -2,7 +2,11 @@
 <head>
 </head>
 <body ng-app="app">
-<div hello-to="AngularJS"></div>
+<div ng-controller="myController">
+    {{ userName }}
+    <hr/>
+    <div hello-to="userName"></div>
+</div>
 <script src="./node_modules/angular/angular.js"></script>
 <script src="./app.js"></script>
 </body>

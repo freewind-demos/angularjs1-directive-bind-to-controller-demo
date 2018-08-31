@@ -1,18 +1,26 @@
 const app = angular.module('app', [])
-app.directive('helloTo', ['$window', function ($window) {
+
+app.controller('myController', function ($scope) {
+    $scope.userName = 'AngularJs'
+})
+
+app.directive('helloTo', function () {
     return {
         restrict: 'A',
         template: '<div>' +
             '   Hello, {{ vm.userName }}' +
-            '   <button ng-click="vm.sayHello()">Alert</button>' +
+            '   <button ng-click="vm.toUpper()">To Upper Case</button>' +
             '</div>',
-        controller: function ($scope, $element, $attrs) {
+        scope: true,
+        controller: function () {
             const vm = this
-            vm.userName = $attrs.helloTo
-            vm.sayHello = function () {
-                $window.alert('Hello, ' + vm.userName)
+            vm.toUpper = function () {
+                vm.userName = vm.userName.toUpperCase()
             }
         },
-        controllerAs: 'vm'
+        controllerAs: 'vm',
+        bindToController: {
+            userName: '=helloTo'
+        }
     }
-}])
+})
